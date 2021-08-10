@@ -11,6 +11,7 @@ namespace Time_Tracker
 
         private TimeSpan _totalTime;
         private readonly Stopwatch _timer;
+        private List<Task> _children;
 
         public TimeSpan GetTime()
         {
@@ -39,6 +40,16 @@ namespace Time_Tracker
             _totalTime += _timer.Elapsed;
         }
 
+        public int NumChildren()
+        {
+            return _children.Count;
+        }
+
+        public void AddChild()
+        {
+            _children.Add(new Task(this));
+        }
+
         public Task(Task parent = null)
         {
             Parent = parent;
@@ -47,7 +58,7 @@ namespace Time_Tracker
             _children = new List<Task>(0);
         }
 
-        private List<Task> _children;
+
 
     }
 }
